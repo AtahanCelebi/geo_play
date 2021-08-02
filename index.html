@@ -63,12 +63,17 @@
     new Datamap({
        done: function(datamap) {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-            var country= prompt("What is the name of the country?");
-            if(country==geography.properties.name){
+            var country = prompt("What is the name of the country?");
+            var m = {};
+            if (country == geography.properties.name) {
+              m[geography.id] = '#009900';
+              datamap.updateChoropleth(m);
               country_score = country_score +1
               document.getElementById("score_point").innerHTML = "Score:"+""+country_score;
               alert("Correct Answer!")
-            }else{
+            } else {
+              m[geography.id] = '#ff0000';
+              datamap.updateChoropleth(m);
               alert("Wrong answer!")
             }
         });

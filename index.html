@@ -61,7 +61,18 @@
 
     // render map
     new Datamap({
-      
+       done: function(datamap) {
+        datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+            var country= prompt("What is the name of the country?");
+            if(country==geography.properties.name){
+              country_score = country_score +1
+              document.getElementById("score_point").innerHTML = "Score:"+""+country_score;
+              alert("Correct Answer!")
+            }else{
+              alert("Wrong answer!")
+            }
+        });
+    },
         element: document.getElementById('container1'),
         projection: 'mercator', // big world map
         // countries don't listed in dataset will be painted with this color
@@ -71,7 +82,7 @@
         width:2000,
         geographyConfig: {
           highlightOnHover: true,
-            popupOnHover: true,
+            popupOnHover: false,
             borderColor: '#DEDEDE',
             highlightBorderWidth: 2,
             // don't change color on mouse hover
